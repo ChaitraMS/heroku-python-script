@@ -1,0 +1,55 @@
+import urllib2
+import csv
+
+
+list = []
+for i in range(8):
+    list.append([])
+
+def assign_val(content):
+    for x in content :
+        list[0].append(x[0])
+        list[1].append(x[1])
+        list[2].append(x[2])
+        list[3].append(x[3])
+        list[4].append(x[4])
+        list[5].append(x[5])
+        list[6].append(x[6])
+        list[7].append(x[7])
+    return
+
+
+def get_bank_det(content,list):
+    m = 0
+    n = raw_input("Enter IFSC: ")
+    if n in list[0]:
+        print n
+        for i,j in enumerate(list[0]):
+            if j == n:
+                m = i
+    else:
+        print "Please emter the valid IFSC"
+    print "IFSC : " + list[0][m]+'\n'"BANK_ID : "+list[1][m]+'\n'"BRANCH : "+list[2][m]+'\n'"ADDRESS : "+list[3][m]+'\n'"CITY : "+list[4][m]+'\n'"DISTRICT : "+list[5][m]+'\n'"STATE : "+list[6][m]+'\n'"BANK_NAME : "+list[7][m]
+    return
+
+def get_brnch_det(content,list):
+    m = 0
+    for i, j in enumerate(list[0]):
+        m = m + 1
+    bank_name = raw_input("Enter Bank Name: ")
+    city = raw_input("Enter City: ")
+    for i in range(m):
+        if(bank_name == list[7][i] and city == list[4][i]):
+            print list[2][i]
+        continue
+    return
+
+
+if __name__ == '__main__':
+
+    url = urllib2.urlopen('https://raw.githubusercontent.com/snarayanank2/indian_banks/master/bank_branches.csv')
+    content = csv.reader(url)
+    assign_val(content)
+    get_bank_det(content,list)
+    get_brnch_det(content,list)
+
